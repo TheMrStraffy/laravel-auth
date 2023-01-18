@@ -1,23 +1,19 @@
 @extends('layouts.app')
 
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
+<div class="jumbotron p-5 mb-4 bg-light rounded-3">
+    <div class="container py-5">
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+        <h2 class="display-7 fw-bold">
+            Hello {{Auth::user()->name}}!
+        </h2>
+
+        <a href="{{route('admin.project.index')}}">Lists of Projects</a>
+
+        <p>admin</p>
     </div>
-</div>
+
+
 @endsection
