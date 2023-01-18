@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug', 150)->unique();
             $table->string('client_name');
             $table->text('summary');
-            $table->string('cover_image')->default('not_available.jpg');
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }
