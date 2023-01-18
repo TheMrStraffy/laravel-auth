@@ -26,6 +26,7 @@ Route::middleware(['auth', 'verified'])
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('project', ProjectController::class);
     Route::get('/index', [ProjectController::class, 'index']);
+    Route::get('/show/{$id}', [ProjectController::class, 'show']);
 });
 
 

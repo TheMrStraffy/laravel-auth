@@ -11,7 +11,7 @@
               <h5 class="card-title">{{$project->name}}</h5>
               <p class="card-title">{{$project->client_name}}</p>
               <p class="card-text ">{{$project->summary}}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="{{route('admin.project.show', $project)}}" class="btn btn-primary">Go To Project</a>
             </div>
           </div>
         @endforeach
