@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(10);
+        $projects = Project::orderBy('id','desc')->paginate(10);
         return view('admin.project.index',compact('projects'));
     }
 
@@ -79,7 +79,14 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $form_data = $request->all();
+        if($form_data['name'] != $project->title){
+            $form_data['slug'] = Project::slugGenerator($form_data['name']);
+        } else{
+            $form_data['slug'] = $project->slug;
+        }
+        $project->update($form_data);
+        return redirect()->route('admin.project.show', $project);
     }
 
     /**
