@@ -9,10 +9,10 @@
         <h2 class="display-7 fw-bold">
             Hello {{Auth::user()->name}}!
         </h2>
+        <p>Welcome to your Admin Page</p>
 
         <a href="{{route('admin.project.index')}}">Lists of Projects</a>
 
-        <p>admin</p>
     </div>
 
 

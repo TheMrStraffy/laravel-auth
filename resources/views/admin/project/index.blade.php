@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row justify-content-evenly">
+<div class="w-100 text-center mb-5">
+
+    <a class="btn btn-primary" href="{{route('admin.project.create')}}">Create New Project</a>
+</div>
+<div class="row justify-content-evenly">
 
         @foreach ($projects as $project)
         <div class="card mb-3" style="width: 18rem;">

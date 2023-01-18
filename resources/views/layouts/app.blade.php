@@ -12,6 +12,7 @@
 
 
     <!-- Fonts -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css' integrity='sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==' crossorigin='anonymous'/>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -25,8 +26,29 @@
 
        @include('admin.partials.header')
 
-        <main class="">
-            @yield('content')
+        <main class="d-flex row w-100">
+            <div class="aside-menu col-1 bg-dark">
+                <ul>
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                    @endif
+                    @else
+                    <li>
+                        <a class="text-white" href="{{route('admin.project.create')}}"><i class="fa-regular fa-file"></i> New Project</a>
+                    </li>
+                    @endguest
+                </ul>
+            </div>
+            <div class="container col-11 p-5">
+
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
