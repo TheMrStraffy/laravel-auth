@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    SHOW CREATE
 
     <div class="container">
         <form action="{{route('admin.project.store')}}" method="POST">

@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    SHOW EDIT
 
     <div class="container">
-        <form action="{{route('admin.project.update', $project)}}" method="POST">
+        <form class="mb-2" action="{{route('admin.project.update', $project)}}" method="POST">
         @csrf
         @method('PUT')
 
@@ -34,5 +33,12 @@
           <a href="{{route('admin.project.index')}}" class="btn btn-primary">Go To Projects</a>
 
         </form>
+
+        <form onsubmit="return confirm('Confermi l\'eliminazione di: {{$project->name}}?')"
+            action="{{route('admin.project.destroy', $project)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger" type="submit" title="delete">Delete</button>
+            </form>
     </div>
 @endsection

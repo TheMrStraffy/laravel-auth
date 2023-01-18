@@ -9,7 +9,15 @@
           <h5 class="card-title">{{$project->name}}</h5>
           <p class="card-title">{{$project->client_name}}</p>
           <p class="card-text ">{{$project->summary}}</p>
-          <a href="{{route('admin.project.index')}}" class="btn btn-primary">Go To Projects</a>
+          <a href="{{route('admin.project.index')}}" class="btn btn-primary mb-2">Go To Projects</a>
+
+          <form onsubmit="return confirm('Confermi l\'eliminazione di: {{$project->name}}?')"
+          action="{{route('admin.project.destroy', $project)}}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button class="btn btn-danger" type="submit" title="delete">Delete</button>
+          </form>
+
         </div>
       </div>
 </div>

@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])
     Route::get('/show/{$id}', [ProjectController::class, 'show']);
     Route::post('/create', [ProjectController::class, 'create']);
     Route::get('/edit/{$id}', [ProjectController::class, 'edit']);
+    Route::delete('/destroy/{$id}', [ProjectController::class, 'destroy']);
 });
 
 
