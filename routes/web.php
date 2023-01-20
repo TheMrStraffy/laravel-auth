@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])
     Route::post('/create', [ProjectController::class, 'create']);
     Route::get('/edit/{$id}', [ProjectController::class, 'edit']);
     Route::delete('/destroy/{$id}', [ProjectController::class, 'destroy']);
+    Route::get('/orderby/{column}/{direction}', [ProjectController::class, 'orderby']);
 });
 
 

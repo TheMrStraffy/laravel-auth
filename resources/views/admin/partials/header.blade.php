@@ -1,12 +1,19 @@
 <header class="bg-dark">
     <nav class="navbar  navbar-expand-md navbar-light  shadow-sm mx-3">
-            <a class="navbar-brand d-flex align-items-center " href="{{ url('/') }}">
-                <div class="logo text-danger d-flex align-items-center px-3">
-                    <i class="fa-solid fa-diagram-project fs-5"></i>
-                    <span class="fs-5 px-2">T.N.P.</span>
-                </div>
-                {{-- config('app.name', 'Laravel') --}}
-            </a>
+        @if (Auth::check())
+        <a class="navbar-brand d-flex align-items-center " href="{{ url('/admin')  }}">
+            @else
+            <a class="navbar-brand d-flex align-items-center " href="{{ url('/')  }}">
+        @endif
+            <div class="logo text-danger d-flex align-items-center px-3">
+                <i class="fa-solid fa-diagram-project fs-5"></i>
+                <span class="fs-5 px-2">T.N.P.</span>
+            </div>
+            {{-- config('app.name', 'Laravel') --}}
+        </a>
+
+
+
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -15,9 +22,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
+                    @if (Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{url('/') }}">{{ __('Home') }}</a>
+                        <a class="nav-link text-white" href="{{url('/admin') }}">{{ __('Home') }}</a>
                     </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{url('/') }}">{{ __('Home') }}</a>
+                        </li>
+                    @endif
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->

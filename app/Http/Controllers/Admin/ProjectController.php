@@ -20,7 +20,10 @@ class ProjectController extends Controller
         $projects = Project::orderBy('id','desc')->paginate(10);
         return view('admin.project.index',compact('projects'));
     }
+    public function orderby(){
+        $direction= 'desc' ? 'asc' : 'desc';
 
+    }
     /**
      * Show the form for creating a new resource.
      *
