@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -18,7 +20,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('id','desc')->paginate(10);
+        if(isset($_GET['search'])){
+            $search = $_GET['search'];
+            $projects = Project::where('name','like', "%$search%")->paginate(10);
+        } else{
+
+            $projects = Project::orderBy('id','desc')->paginate(10);
+        }
         return view('admin.project.index',compact('projects'));
     }
     public function orderby(){

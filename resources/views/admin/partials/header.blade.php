@@ -36,6 +36,14 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                    {{-- Search Bar --}}
+                    @if(Route::currentRouteName() === 'admin.project.index')
+                    <li class="my-auto">
+                        <form  action="{{route('admin.project.index')}}" method="GET">
+                        <input type="text" name="search" id="search" class="rounded-3" placeholder="search">
+                        </form>
+                    </li>
+                    @endif
                     <!-- Authentication Links -->
                     @guest
                     <li class="nav-item">
@@ -53,7 +61,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{route('admin.dashboard')}}">Dashboard</a>
+                            <a class="dropdown-item" href="{{route('admin.project.index')}}">Projects</a>
                             <a class="dropdown-item" href="{{route('admin.project.create')}}">Create New Project</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
