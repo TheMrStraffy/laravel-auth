@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -43,10 +44,17 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $form_data = $request->all();
+
+        if(array_key_exists('cover_image', $form_data)){
+            $form_data['image_original_name'] = $request->file('cover_image')->getClientOriginalName();
+            $form_data['cover_image'] = Storage::put('uploads', $form_data['cover_image']);
+        }
+
         $new_project = new Project();
         $form_data['slug'] = Project::slugGenerator($form_data['name']);
+
+        // dd($new_project);
         $new_project->fill($form_data);
-        // dump($new_project);
         $new_project->save();
         return redirect()->route('admin.project.show', $new_project);
     }
@@ -83,6 +91,14 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $form_data = $request->all();
+        if(array_key_exists('cover_image', $form_data)){
+            if($project->cover_image){
+                Storage::disk('public')->delete($project->cover_image);
+            }
+            $form_data['image_original_name'] =  $request->file('cover_image')->getClientOriginalName();
+            $form_data['cover_image'] = Storage::put('uploads', $form_data['cover_image']);
+        }
+
         if($form_data['name'] != $project->title){
             $form_data['slug'] = Project::slugGenerator($form_data['name']);
         } else{
@@ -100,6 +116,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->cover_image) {
+            Storage::disk('public')->delete($project->cover_image);
+        }
         $project->delete();
         return redirect()->route('admin.project.index');
     }

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <form class="mb-2" action="{{route('admin.project.update', $project)}}" method="POST">
+        <form class="mb-2" action="{{route('admin.project.update', $project)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -18,14 +18,16 @@
           </div>
 
           <div class="mb-3">
-              <label for="summary" class="form-label">Summary</label>
-              <textarea class="form-control" name="summary" id="summary"
-              >{{old('summary', $project->summary)}}</textarea>
-            </div>
+            <label for="summary" class="form-label">Summary</label>
+            <textarea
+            class="form-control" name="summary" id="summary" >{{old('summary', $project->summary)}}</textarea>
+          </div>
 
             <div class="mb-3">
               <label for="cover_image" class="form-label">Image</label>
-              <input type="text" class="form-control" id="cover_image" name="cover_image" value="{{old('cover_image', $project->cover_image)}}">
+              <input onchange="showImage(event)" type="file" class="form-control" id="cover_image" name="cover_image">
+              <img id="output-image" width="150" src="{{asset('storage/'.$project['cover_image'])}}" alt="">
+
             </div>
 
 
@@ -41,4 +43,20 @@
             <button class="btn btn-danger" type="submit" title="delete">Delete</button>
             </form>
     </div>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#summary' ), {
+                toolbar: ['bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList']
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+
+            function showImage(event){
+            console.log(event.target.files.[0]);
+            const tagImage = document.getElementById('output-image');
+            tagImage.src = URL.createObjectURL(event.target.files.[0])
+            }
+    </script>
 @endsection

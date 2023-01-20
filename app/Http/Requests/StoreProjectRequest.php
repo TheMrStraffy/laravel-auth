@@ -35,6 +35,6 @@ class StoreProjectRequest extends FormRequest
             'name.required'=>'It must have a name',
             'name.max'=>'It must be less than 100 chars',
             'name.min'=>'It must be more than 3 chars',
-        ]
+        ];
     }
 }
